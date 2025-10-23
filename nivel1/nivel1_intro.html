@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 1 — El Primer Rastro</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Proyecto Preventivo — Caso L.R.: Decisiones que dejan huella</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>El equipo encontró un cuaderno con notas de un compañero que muestran cambios en su conducta: cansancio, falta de asistencia y frases que sugieren confusión o malestar. Analicen la información y detecten señales de alerta tempranas.</p>
+
+            <input type="text" id="grupo" placeholder="Ingrese el nombre de su grupo">
+            <button id="iniciar">Iniciar Análisis</button>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 25:00</div>
+            <div id="terminal"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        let tiempoRestante = 25 * 60; // 25 minutos
+        let cronometroInterval;
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                alert("Tiempo del nivel agotado");
+                // Aquí el monitor puede llevar a la pantalla de cierre o reto
+            }
+            tiempoRestante--;
+        }
+
+        document.getElementById('iniciar').addEventListener('click', () => {
+            const grupo = document.getElementById('grupo').value.trim();
+            if (!grupo) {
+                alert("Por favor ingrese el nombre de su grupo antes de continuar.");
+                return;
+            }
+
+            localStorage.setItem('nombreGrupo', grupo);
+            localStorage.setItem('inicioTiempo', Date.now());
+
+            cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+            // Efecto tipo terminal antes de pasar al siguiente nivel
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML = "<p>> Iniciando sesión de investigación...</p>";
+
+            setTimeout(() => {
+                terminal.innerHTML += "<p>> Procesando informe...</p>";
+            }, 1000);
+
+            setTimeout(() => {
+                terminal.innerHTML += "<p>> Accediendo a Pregunta 1...</p>";
+            }, 2000);
+
+            setTimeout(() => {
+                window.location.href = "pregunta1.html";
+            }, 3500); // luego de 3.5s redirige a la pregunta
+        });
+    </script>
+</body>
+</html>

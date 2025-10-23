@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 3 — Pregunta 6</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nivel 3 — El Efecto</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>Pregunta 6: Si un compañero dice “no pasa nada”, ¿qué deberíamos hacer?</p>
+
+            <div class="opciones">
+                <button class="respuesta" data-correcta="false">A) Dejarlo tranquilo</button>
+                <button class="respuesta" data-correcta="true">B) Preguntar con respeto y ofrecer ayuda</button>
+                <button class="respuesta" data-correcta="false">C) Reírnos del comentario</button>
+                <button class="respuesta" data-correcta="false">D) Ignorarlo completamente</button>
+            </div>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 05:00</div>
+
+            <div id="mensaje"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        let tiempoRestante = 5 * 60;
+        let cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                document.getElementById('mensaje').innerHTML = "<p>Tiempo agotado. ⚠️ Reto de conciencia necesario.</p><p>El monitor asignará la letra correspondiente.</p>";
+            }
+            tiempoRestante--;
+        }
+
+        const botones = document.querySelectorAll('.respuesta');
+        botones.forEach(btn => {
+            btn.addEventListener('click', () => {
+                clearInterval(cronometroInterval);
+                const correcta = btn.getAttribute('data-correcta') === 'true';
+                const mensajeDiv = document.getElementById('mensaje');
+
+                if (correcta) {
+                    mensajeDiv.innerHTML = "<p>Correcto ✅ Entregue microrecompensa al grupo</p>";
+
+                    // No se agrega letra en esta pregunta
+                    setTimeout(() => {
+                        window.location.href = "pregunta7.html"; // Redirige a la siguiente pregunta
+                    }, 2000);
+                } else {
+                    mensajeDiv.innerHTML = "<p>Incorrecto ❌ Intenten nuevamente o cumplan el reto si el tiempo se agota</p>";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

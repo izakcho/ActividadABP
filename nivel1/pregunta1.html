@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 1 — Pregunta 1</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nivel 1 — El Primer Rastro</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>Pregunta 1: ¿Cuál fue la primera señal de alerta detectada en el comportamiento del compañero?</p>
+
+            <div class="opciones">
+                <button class="respuesta" data-correcta="false">A) Cambios en la forma de vestir</button>
+                <button class="respuesta" data-correcta="true">B) Falta de asistencia y cansancio</button>
+                <button class="respuesta" data-correcta="false">C) Bajo rendimiento en deportes</button>
+                <button class="respuesta" data-correcta="false">D) Llegadas tardías a la escuela</button>
+            </div>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 05:00</div>
+
+            <div id="codigo-obtenido" class="codigo">Código parcial: [ _ _ _ _ _ ]</div>
+
+            <div id="mensaje"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        // Cronómetro de 5 minutos
+        let tiempoRestante = 5 * 60;
+        let cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                document.getElementById('mensaje').innerHTML = "<p>Tiempo agotado. ⚠️ Reto necesario.</p><p>El monitor asignará la letra correspondiente.</p>";
+                // Aquí el monitor decide cómo dar la letra
+            }
+            tiempoRestante--;
+        }
+
+        // Manejo de respuestas
+        const botones = document.querySelectorAll('.respuesta');
+        botones.forEach(btn => {
+            btn.addEventListener('click', () => {
+                clearInterval(cronometroInterval); // Detiene el cronómetro
+                const correcta = btn.getAttribute('data-correcta') === 'true';
+                const mensajeDiv = document.getElementById('mensaje');
+                const codigoDiv = document.getElementById('codigo-obtenido');
+
+                if (correcta) {
+                    mensajeDiv.innerHTML = "<p>Correcto ✅ Entregue microrecompensa al grupo</p>";
+                    // Actualiza letra correspondiente (primer letra S)
+                    let codigoActual = localStorage.getItem('codigoNivel1') || "_____";
+                    codigoActual = 'S' + codigoActual.substring(1);
+                    localStorage.setItem('codigoNivel1', codigoActual);
+                    codigoDiv.textContent = `Código parcial: [ ${codigoActual.split('').join(' ')} ]`;
+
+                    setTimeout(() => {
+                        window.location.href = "pregunta2.html"; // Redirige a siguiente pregunta
+                    }, 2000);
+                } else {
+                    mensajeDiv.innerHTML = "<p>Incorrecto ❌ Intenten nuevamente o cumplan el reto si el tiempo se agota</p>";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

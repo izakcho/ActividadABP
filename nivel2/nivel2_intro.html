@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nivel 2 — La Conexión</title>
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* Evita scroll */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Centra el contenedor y lo hace más ancho */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0d0d0d; /* el mismo fondo del CSS principal */
+    }
+
+    .container {
+      width: 1200px;   /* más ancho */
+      max-width: 90vw; /* se adapta si la pantalla es más pequeña */
+      height: 85vh;    /* ocupa el 85% de la altura visible */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Ajusta el terminal para caber bien dentro */
+    #terminal {
+      height: 130px;
+      overflow-y: auto;
+    }
+
+    /* Asegura que el contenido no se salga horizontalmente */
+    .cuerpo {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="stage">
+    <header>
+      <h1>Proyecto Preventivo — Caso L.R.: La Conexión</h1>
+      <div class="sub">Informe confidencial N°2 – Comunicación interna.</div>
+    </header>
+
+    <section class="cuerpo">
+      <p>
+        Tras analizar los objetos hallados en la mochila, se descubrió que uno de los cuadernos contenía varios nombres con iniciales y horarios.
+        Al revisar las cámaras del colegio, se detectaron encuentros frecuentes entre tres estudiantes después de clases, cerca del laboratorio viejo.
+        <br><br>
+        Los mensajes filtrados del chat escolar muestran frases como: “Hoy toca probar lo del frasco azul”, “Que nadie diga nada” y “El nuevo dice que sí o sí tiene que intentar”.
+        Tu equipo debe analizar las conversaciones y descubrir quién estaba presionando a quién y qué indicios apuntan a manipulación o riesgo.
+      </p>
+
+      <input type="text" id="grupo" placeholder="Ingrese el nombre de su grupo">
+      <button id="iniciar">Iniciar Análisis</button>
+
+      <div id="cronometro" class="cronometro">Tiempo restante: 25:00</div>
+      <div id="terminal"></div>
+    </section>
+
+    <footer class="footer-msg">Monitor activo</footer>
+  </div>
+
+  <script>
+    // --- Cronómetro y flujo con terminal ---
+    let tiempoRestante = 25 * 60;
+    let cronometroInterval;
+
+    function actualizarCronometro() {
+      const minutos = Math.floor(tiempoRestante / 60);
+      const segundos = tiempoRestante % 60;
+      document.getElementById('cronometro').textContent =
+        `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+      if (tiempoRestante <= 0) {
+        clearInterval(cronometroInterval);
+        alert("Tiempo del nivel agotado");
+      }
+      tiempoRestante--;
+    }
+
+    document.getElementById('iniciar').addEventListener('click', () => {
+      const grupo = document.getElementById('grupo').value.trim();
+      if (!grupo) {
+        alert("Por favor ingrese el nombre de su grupo antes de continuar.");
+        return;
+      }
+
+      localStorage.setItem('nombreGrupo', grupo);
+      localStorage.setItem('inicioTiempoNivel2', Date.now());
+      cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+      const terminal = document.getElementById('terminal');
+      terminal.innerHTML = "<p>&gt; Iniciando sesión de análisis...</p>";
+
+      setTimeout(() => {
+        terminal.innerHTML += "<p>&gt; Procesando evidencia...</p>";
+        terminal.scrollTop = terminal.scrollHeight;
+      }, 1000);
+
+      setTimeout(() => {
+        terminal.innerHTML += "<p>&gt; Accediendo a Pregunta 1 del Nivel 2...</p>";
+        terminal.scrollTop = terminal.scrollHeight;
+      }, 2000);
+
+      setTimeout(() => {
+        window.location.href = "pregunta1.html";
+      }, 3500);
+    });
+  </script>
+</body>
+</html>

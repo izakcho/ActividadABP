@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 3 — El Efecto</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nivel 3 — El Efecto</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>Informe de seguimiento N°3 – Departamento de orientación</p>
+            <p>
+                Durante las últimas semanas, varios compañeros notaron cambios en el comportamiento de “L.R.”: faltaba a clases, se veía cansado y distante, y dejó de asistir a las prácticas de su grupo.
+            </p>
+            <p>
+                En el laboratorio se encontró un cuaderno con frases confusas y una hoja donde escribió: 
+                “Ya no me siento igual. Lo que empezó como algo pequeño ahora me pesa.”
+            </p>
+            <p>
+                El equipo de orientación pidió analizar el caso desde tres ángulos:
+                <ol>
+                    <li>Señales de alerta ignoradas.</li>
+                    <li>Impacto de decisiones individuales en el grupo.</li>
+                    <li>Acciones preventivas que se pudieron tomar a tiempo.</li>
+                </ol>
+            </p>
+
+            <input type="text" id="grupo" placeholder="Ingrese el nombre de su grupo">
+            <button id="iniciar">Iniciar Análisis</button>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 30:00</div>
+            <div id="terminal"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        let tiempoRestante = 30 * 60; // 30 minutos
+        let cronometroInterval;
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                alert("Tiempo del nivel agotado");
+                // Aquí el monitor puede llevar a la pantalla de cierre o reto
+            }
+            tiempoRestante--;
+        }
+
+        document.getElementById('iniciar').addEventListener('click', () => {
+            const grupo = document.getElementById('grupo').value.trim();
+            if (!grupo) {
+                alert("Por favor ingrese el nombre de su grupo antes de continuar.");
+                return;
+            }
+
+            localStorage.setItem('nombreGrupo', grupo);
+            localStorage.setItem('inicioTiempoNivel3', Date.now());
+
+            cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML = "<p>> Iniciando sesión de investigación...</p>";
+
+            setTimeout(() => {
+                terminal.innerHTML += "<p>> Procesando informe...</p>";
+            }, 1000);
+
+            setTimeout(() => {
+                terminal.innerHTML += "<p>> Accediendo a Pregunta 1...</p>";
+            }, 2000);
+
+            setTimeout(() => {
+                window.location.href = "pregunta1.html"; // Primer archivo de preguntas del nivel 3
+            }, 3500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 2 — Pregunta 5</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Nivel 2 — La Conexión</h1>
+    </header>
+
+    <section class="cuerpo">
+        <p>Cuando un amigo invita a “solo probar”, ¿cuál sería la decisión más responsable según los factores de riesgo?</p>
+
+        <div class="opciones">
+            <button class="respuesta" data-correcta="true">A) Negarse y explicar sus motivos</button>
+            <button class="respuesta" data-correcta="false">B) Irse sin decir nada</button>
+            <button class="respuesta" data-correcta="false">C) Reírse para no incomodar</button>
+            <button class="respuesta" data-correcta="false">D) Hacerlo una vez</button>
+        </div>
+
+        <div id="cronometro" class="cronometro">Tiempo restante: 05:00</div>
+        <div id="codigo-obtenido" class="codigo">Código parcial: [ C O N _ _ ]</div>
+        <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">Monitor activo</footer>
+</div>
+
+<script>
+let tiempoRestante = 5 * 60;
+let cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+function actualizarCronometro() {
+    let minutos = Math.floor(tiempoRestante / 60);
+    let segundos = tiempoRestante % 60;
+    document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+    if (tiempoRestante <= 0) {
+        clearInterval(cronometroInterval);
+        document.getElementById('mensaje').innerHTML = "<p>Tiempo agotado. ⚠️ Reto de influencia.</p>";
+    }
+    tiempoRestante--;
+}
+
+const botones = document.querySelectorAll('.respuesta');
+botones.forEach(btn => {
+    btn.addEventListener('click', () => {
+        clearInterval(cronometroInterval);
+        const correcta = btn.getAttribute('data-correcta') === 'true';
+        const mensajeDiv = document.getElementById('mensaje');
+        const codigoDiv = document.getElementById('codigo-obtenido');
+
+        if (correcta) {
+            mensajeDiv.innerHTML = "<p>Correcto ✅ Microrecompensa entregada</p>";
+            let codigoActual = localStorage.getItem('codigoNivel2') || "CON__";
+            localStorage.setItem('codigoNivel2', codigoActual);
+            codigoDiv.textContent = `Código parcial: [ ${codigoActual.split('').join(' ')} ]`;
+
+            setTimeout(() => { window.location.href = "pregunta6.html"; }, 2000);
+        } else {
+            mensajeDiv.innerHTML = "<p>Incorrecto ❌ Intenten nuevamente o cumplan el reto si se acaba el tiempo</p>";
+        }
+    });
+});
+</script>
+</body>
+</html>
