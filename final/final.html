@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Final — CONFIAR VIDAS</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .final-container {
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    h1 {
+      color: #c0392b;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+
+    h2 {
+      color: #e0e0e0;
+      margin-bottom: 30px;
+    }
+
+    .mensaje {
+      border: 1px solid #c0392b55;
+      background: rgba(15, 15, 15, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #c0392b33;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .frase-final {
+      color: #c0392b;
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 18px;
+      animation: blink 2s infinite alternate;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes blink {
+      from { opacity: 0.6; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container final-container">
+    <h1> CASO CERRADO</h1>
+    <h2>Mensaje final — <span style="color:#c0392b;">CONFIAR VIDAS</span></h2>
+
+    <div class="mensaje">
+      <p><strong>CONFIAR VIDAS</strong> significa <strong>cuidar, hablar y actuar a tiempo</strong>.</p>
+      <p>Este mensaje une todo lo aprendido en los niveles anteriores:</p>
+      <ul style="text-align:left; display:inline-block; margin-top:15px;">
+        <li>Escuchar y no juzgar.</li>
+        <li>Actuar cuando alguien lo necesita.</li>
+        <li>Recordar que cada palabra puede prevenir un riesgo.</li>
+      </ul>
+      <p style="margin-top:20px;">La prevención no se enseña, <strong>se vive</strong>.</p>
+    </div>
+
+    <div class="frase-final">
+      “Gracias por romper el silencio.”
+    </div>
+
+    <footer class="footer-msg">
+      Sistema de casos — Proyecto de Prevención SPA
+    </footer>
+  </div>
+</body>
+</html>
