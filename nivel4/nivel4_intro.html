@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 4 — La Verdad</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nivel 4 — La Verdad</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>Informe final del caso L.R. – Departamento de orientación</p>
+            <p>
+                Tras entrevistas y análisis de los mensajes hallados, se determinó que L.R. no buscaba escapar, sino que se sintió sin salida ante la presión, el cansancio y el silencio de quienes notaron su cambio.
+            </p>
+            <p>
+                Uno de sus compañeros finalmente habló con el orientador. Gracias a esa acción, L.R. recibió acompañamiento y apoyo familiar.
+            </p>
+            <blockquote>
+                “Pensé que pedir ayuda era rendirme, pero fue la primera vez que realmente respiré.”
+            </blockquote>
+            <p>El equipo de orientación cierra el caso con una recomendación:</p>
+            <p><em>“El silencio también puede ser un riesgo. La prevención empieza cuando alguien se atreve a hablar.”</em></p>
+
+            <input type="text" id="grupo" placeholder="Ingrese el nombre de su grupo">
+            <button id="iniciar">Iniciar Preguntas</button>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 25:00</div>
+            <div id="terminal"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        let tiempoRestante = 25 * 60; // 25 minutos
+        let cronometroInterval;
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent = `Tiempo restante: ${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                alert("Tiempo del nivel agotado");
+                // Aquí el monitor puede llevar a la pantalla de cierre o reto
+            }
+            tiempoRestante--;
+        }
+
+        document.getElementById('iniciar').addEventListener('click', () => {
+            const grupo = document.getElementById('grupo').value.trim();
+            if (!grupo) {
+                alert("Por favor ingrese el nombre de su grupo antes de continuar.");
+                return;
+            }
+
+            localStorage.setItem('nombreGrupo', grupo);
+            localStorage.setItem('inicioTiempoNivel4', Date.now());
+
+            cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+            const terminal = document.getElementById('terminal');
+            terminal.innerHTML = "<p>> Iniciando sesión de análisis final...</p>";
+
+            setTimeout(() => {
+                terminal.innerHTML += "<p>> Preparando preguntas del Nivel 4...</p>";
+            }, 1000);
+
+            setTimeout(() => {
+                window.location.href = "pregunta1.html";
+            }, 3000); // Redirige al primer archivo de preguntas
+        });
+    </script>
+</body>
+</html>

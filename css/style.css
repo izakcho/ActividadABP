@@ -84,3 +84,26 @@ button:hover {
   font-size: 12px;
   color: #777;
 }
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* separación entre botones */
+  margin-top: 20px;
+}
+
+.opciones .respuesta {
+  background-color: #111; /* fondo negro oscuro */
+  color: #e0e0e0; /* texto gris claro */
+  border: 2px solid #c0392b; /* borde rojo */
+  border-radius: 5px;
+  padding: 12px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.opciones .respuesta:hover {
+  background-color: #1c1c1c; /* un poco más claro al pasar mouse */
+  border-color: #e74c3c; /* borde rojo brillante al hover */
+}

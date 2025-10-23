@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 6 — Nivel 4</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pregunta 6 — Nivel 4</h1>
+    </header>
+
+    <section class="cuerpo">
+      <p><strong>¿Qué valor se refuerza cuando alguien decide ayudar a otro?</strong></p>
+
+      <button class="opcion" data-correcta="true">A) Solidaridad</button>
+      <button class="opcion" data-correcta="false">B) Indiferencia</button>
+      <button class="opcion" data-correcta="false">C) Miedo</button>
+      <button class="opcion" data-correcta="false">D) Culpa</button>
+
+      <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">
+      Nivel 4 — “La Verdad”
+    </footer>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll('.opcion');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        if (boton.dataset.correcta === "true") {
+          mensajeDiv.innerHTML = "<p>✅ Correcto. Continúa con la siguiente pregunta.</p>";
+          setTimeout(() => {
+            window.location.href = "pregunta7.html";
+          }, 1200);
+        } else {
+          mensajeDiv.innerHTML = "<p>❌ Incorrecto. Intenta de nuevo.</p>";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

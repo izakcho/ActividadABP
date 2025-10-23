@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nivel 4 — Código Final</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Nivel 4 — La Verdad</h1>
+    </header>
+
+    <section class="cuerpo">
+      <p>Ingrese el código completo para cerrar el caso:</p>
+
+      <input type="text" id="codigo-input" placeholder="Ingrese código final (CONFIAR VIDAS)">
+      <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">
+      Monitor activo — Cierre del caso
+    </footer>
+  </div>
+
+  <script>
+    const inputCodigo = document.getElementById('codigo-input');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    inputCodigo.addEventListener('input', () => {
+      const codigoIngresado = inputCodigo.value.trim().toUpperCase();
+
+      if (codigoIngresado === 'CONFIAR VIDAS') {
+        mensajeDiv.innerHTML = "<p>✅ Código correcto. Caso cerrado exitosamente.</p>";
+        localStorage.setItem('nivel4Completado', 'true');
+
+        // Redirige a la pantalla final del juego
+        setTimeout(() => {
+          window.location.href = "../final/final.html";
+        }, 1500);
+      } else {
+        mensajeDiv.innerHTML = "";
+      }
+    });
+  </script>
+</body>
+</html>

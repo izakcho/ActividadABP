@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 4 — Pregunta 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nivel 4 — La Verdad</h1>
+        </header>
+
+        <section class="cuerpo">
+            <p>Pregunta 1: ¿Qué fue lo que permitió que L.R. recibiera ayuda?</p>
+
+            <div class="opciones">
+                <button class="respuesta" data-correcta="false">A) Que sus padres lo castigaran.</button>
+                <button class="respuesta" data-correcta="true">B) Que un compañero hablara con el orientador.</button>
+                <button class="respuesta" data-correcta="false">C) Que se descubriera un mensaje anónimo.</button>
+                <button class="respuesta" data-correcta="false">D) Que él se fuera del colegio.</button>
+            </div>
+
+            <div id="cronometro" class="cronometro">Tiempo restante: 05:00</div>
+
+            <div id="codigo-obtenido" class="codigo">Código parcial: [ _ _ _ _ _ ]</div>
+
+            <div id="mensaje"></div>
+        </section>
+
+        <footer class="footer-msg">
+            Monitor activo
+        </footer>
+    </div>
+
+    <script>
+        // Cronómetro de 5 minutos por pregunta
+        let tiempoRestante = 5 * 60;
+        let cronometroInterval = setInterval(actualizarCronometro, 1000);
+
+        function actualizarCronometro() {
+            let minutos = Math.floor(tiempoRestante / 60);
+            let segundos = tiempoRestante % 60;
+            document.getElementById('cronometro').textContent =
+                `Tiempo restante: ${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+            if (tiempoRestante <= 0) {
+                clearInterval(cronometroInterval);
+                document.getElementById('mensaje').innerHTML =
+                    "<p>Tiempo agotado ⚠️ El monitor decidirá el reto correspondiente.</p>";
+            }
+            tiempoRestante--;
+        }
+
+        // Manejo de respuestas
+        const botones = document.querySelectorAll('.respuesta');
+        botones.forEach(btn => {
+            btn.addEventListener('click', () => {
+                clearInterval(cronometroInterval);
+                const correcta = btn.getAttribute('data-correcta') === 'true';
+                const mensajeDiv = document.getElementById('mensaje');
+                const codigoDiv = document.getElementById('codigo-obtenido');
+
+                if (correcta) {
+                    mensajeDiv.innerHTML = "<p>✅ Correcto. Avanzan al siguiente análisis.</p>";
+
+                    // Primera letra del código "C" (de CONFIAR VIDAS)
+                    let codigoActual = localStorage.getItem('codigoNivel4') || "_____";
+                    codigoActual = 'C' + codigoActual.substring(1);
+                    localStorage.setItem('codigoNivel4', codigoActual);
+
+                    codigoDiv.textContent = `Código parcial: [ ${codigoActual.split('').join(' ')} ]`;
+
+                    setTimeout(() => {
+                        window.location.href = "pregunta2.html";
+                    }, 2000);
+                } else {
+                    mensajeDiv.innerHTML = "<p>❌ Incorrecto. Intenten nuevamente o esperen el reto del monitor.</p>";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

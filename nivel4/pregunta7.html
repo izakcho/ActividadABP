@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 7 — Nivel 4</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pregunta 7 — Nivel 4</h1>
+    </header>
+
+    <section class="cuerpo">
+      <p><strong>¿Qué representa “La Verdad” en el contexto del caso?</strong></p>
+
+      <button class="opcion" data-correcta="true">A) La comprensión del problema y el valor de pedir ayuda.</button>
+      <button class="opcion" data-correcta="false">B) Un castigo.</button>
+      <button class="opcion" data-correcta="false">C) Una confesión forzada.</button>
+      <button class="opcion" data-correcta="false">D) Una sanción disciplinaria.</button>
+
+      <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">
+      Nivel 4 — “La Verdad”
+    </footer>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll('.opcion');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        if (boton.dataset.correcta === "true") {
+          mensajeDiv.innerHTML = "<p>✅ Correcto. Has completado el Nivel 4.</p>";
+          setTimeout(() => {
+            window.location.href = "nivel4_codigo.html";
+          }, 1500);
+        } else {
+          mensajeDiv.innerHTML = "<p>❌ Incorrecto. Intenta de nuevo.</p>";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 4 — Nivel 4</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pregunta 4 — Nivel 4</h1>
+    </header>
+
+    <section class="cuerpo">
+      <p><strong>Si alguien del grupo empieza a aislarse o cambiar su actitud, ¿qué se debe hacer?</strong></p>
+
+      <button class="opcion" data-correcta="true">A) Conversar con respeto y ofrecer acompañamiento.</button>
+      <button class="opcion" data-correcta="false">B) Esperar que el profesor lo note.</button>
+      <button class="opcion" data-correcta="false">C) Publicarlo en redes.</button>
+      <button class="opcion" data-correcta="false">D) Hacer bromas para que reaccione.</button>
+
+      <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">
+      Nivel 4 — “La Verdad”
+    </footer>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll('.opcion');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        if (boton.dataset.correcta === "true") {
+          mensajeDiv.innerHTML = "<p>✅ Correcto. Continúa con la siguiente pregunta.</p>";
+          setTimeout(() => {
+            window.location.href = "pregunta5.html";
+          }, 1200);
+        } else {
+          mensajeDiv.innerHTML = "<p>❌ Incorrecto. Intenta de nuevo.</p>";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

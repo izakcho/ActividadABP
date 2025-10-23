@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pregunta 3 — Nivel 4</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Pregunta 3 — Nivel 4</h1>
+    </header>
+
+    <section class="cuerpo">
+      <p><strong>¿Cuál de las siguientes acciones previene situaciones como la de L.R.?</strong></p>
+
+      <button class="opcion" data-correcta="true">A) Escuchar sin juzgar y buscar apoyo.</button>
+      <button class="opcion" data-correcta="false">B) Guardar el secreto.</button>
+      <button class="opcion" data-correcta="false">C) Contarlo como rumor.</button>
+      <button class="opcion" data-correcta="false">D) No decir nada para evitar problemas.</button>
+
+      <div id="mensaje"></div>
+    </section>
+
+    <footer class="footer-msg">
+      Nivel 4 — “La Verdad”
+    </footer>
+  </div>
+
+  <script>
+    const botones = document.querySelectorAll('.opcion');
+    const mensajeDiv = document.getElementById('mensaje');
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        if (boton.dataset.correcta === "true") {
+          mensajeDiv.innerHTML = "<p>✅ Correcto. Continúa con la siguiente pregunta.</p>";
+          setTimeout(() => {
+            window.location.href = "pregunta4.html";
+          }, 1200);
+        } else {
+          mensajeDiv.innerHTML = "<p>❌ Incorrecto. Intenta de nuevo.</p>";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
